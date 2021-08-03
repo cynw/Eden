@@ -20,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
         change = Vector3.zero;
         change.x = Input.GetAxisRaw("Horizontal");
         change.z = Input.GetAxisRaw("Vertical");
-        Debug.Log(change);
         if (change != Vector3.zero)
         {
             MoveCharacter();
