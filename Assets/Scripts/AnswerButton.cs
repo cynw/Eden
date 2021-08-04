@@ -5,25 +5,41 @@ using UnityEngine.SceneManagement;
 
 public class AnswerButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject fadeInPanel;
+    public GameObject fadeOutPanel;
+    public float fadeWait;
+
+    private void Awake()
     {
-        
+        if (fadeInPanel != null)
+        {
+            GameObject panel = Instantiate(fadeInPanel, Vector3.zero, Quaternion.identity);
+            Destroy(panel, 1);
+        }
     }
 
     public void AnswerNormal()
     {
-        SceneManager.LoadScene("Map");
+        StartCoroutine(FadeCo());
     }
 
     public void AnswerAbNormal()
     {
-        SceneManager.LoadScene("Map");
+        StartCoroutine(FadeCo());
+    }
+
+    public IEnumerator FadeCo()
+    {
+        if (fadeOutPanel != null)
+        {
+            Instantiate(fadeOutPanel, Vector3.zero, Quaternion.identity);
+        }
+        yield return new WaitForSeconds(fadeWait);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Map");
+        while (!asyncOperation.isDone)
+        {
+            yield return null;
+        }
     }
 }
