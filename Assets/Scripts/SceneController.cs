@@ -23,7 +23,7 @@ public class SceneController : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(5, 15));
+            yield return new WaitForSeconds(Random.Range(5, 10));
             int randomIndex = Random.Range(0, buildingObjects.Count);
             BuildingState state = buildingObjects[randomIndex].GetComponent<BuildingState>();
             if (!state.isHasProposal())

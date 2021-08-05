@@ -141,7 +141,8 @@ namespace Unity.FPS.Gameplay
 
         //var didSomething = false;
         public Text subtitle;
-
+        public GameObject fadeOutPanel;
+        public float fadeWait;
 
         void Awake()
         {
@@ -233,7 +234,7 @@ namespace Unity.FPS.Gameplay
 
             if (!didGoOut && transform.position.x > -13)
             {
-                GoToMap();
+                StartCoroutine(GoToMap());
                 didGoOut = true;
             }
         }
@@ -249,10 +250,15 @@ namespace Unity.FPS.Gameplay
             yield return new WaitForSeconds(3);
             subtitle.text = "Just do it for now. But first, get out from there! They're here.";
         }
-        
-        void GoToMap()
+
+        IEnumerator GoToMap()
         {
             subtitle.text = "Let's Go..";
+            if (fadeOutPanel != null)
+            {
+                Instantiate(fadeOutPanel, Vector3.zero, Quaternion.identity);
+            }
+            yield return new WaitForSeconds(fadeWait);
             SceneManager.LoadScene("Map");
         }
 
