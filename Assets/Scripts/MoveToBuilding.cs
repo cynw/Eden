@@ -11,6 +11,9 @@ public class MoveToBuilding : MonoBehaviour
     public GameObject fadeInPanel;
     public GameObject fadeOutPanel;
     public float fadeWait;
+    public GameObject building;
+    public GameObject exitPoint;
+    public VectorValue playerPosition;
 
 
     private void Awake()
@@ -37,6 +40,8 @@ public class MoveToBuilding : MonoBehaviour
         }
         yield return new WaitForSeconds(fadeWait);
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneToLoad);
+        playerPosition.initialValue = exitPoint.transform.position;
+        building.GetComponent<BuildingState>().SetHasProposal(false);
         while (!asyncOperation.isDone)
         {
             yield return null;
