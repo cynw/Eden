@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Map.unity
     guid: 405b6947dea79b848afefafbe6a53555
+  - enabled: 1
+    path: Assets/Scenes/ProposalViewer.unity
+    guid: 3dd11a8513e77064e808289ec7dc5d44
   m_configObjects: {}
