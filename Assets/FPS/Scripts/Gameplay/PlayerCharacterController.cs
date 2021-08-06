@@ -109,6 +109,7 @@ namespace Unity.FPS.Gameplay
 
         public bool didFirstCutScene = false;
         public bool didGoOut = false;
+        public bool didSecondScene = false;        
 
         public float RotationMultiplier
         {
@@ -143,6 +144,7 @@ namespace Unity.FPS.Gameplay
         public Text subtitle;
         public GameObject fadeOutPanel;
         public float fadeWait;
+        public GameObject ChoiceButton;
 
         void Awake()
         {
@@ -237,29 +239,42 @@ namespace Unity.FPS.Gameplay
                 StartCoroutine(GoToMap());
                 didGoOut = true;
             }
+
+            if (!didSecondScene && transform.position.x > -18)
+            {
+                StartCoroutine(SecondCutScene());
+                didSecondScene = true;
+            }
         }
 
         IEnumerator FirstCutScene()
         {
             //todo: Speaker speaks to the person, can't move
-            subtitle.text = "Oh! You're here!";
+            subtitle.text = "โอเค คุณมาถึงละ";
             yield return new WaitForSeconds(4);
-            subtitle.text = "I will tell you what happen. You need to get out from there, and find a proposal";
+            subtitle.text = "คุณต้องทำตามที่ผมบอก ต่อจากนี้คุณจะต้องตามหาสิ่งที่เรียกว่า proposal";
             yield return new WaitForSeconds(5);
-            subtitle.text = "Wait what? What's going on here!";
+            subtitle.text = "เดี๋ยวๆ เกิดอะไรขึ้น!";
             yield return new WaitForSeconds(3);
-            subtitle.text = "Just do it for now. But first, get out from there! They're here.";
+            subtitle.text = "ไม่มีเวลาอธิบาย พวกมันมาแล้ว ออกไปจากที่นี่เร็ว!";
         }
 
-        IEnumerator GoToMap()
+        public IEnumerator GoToMap()
         {
-            subtitle.text = "Let's Go..";
             if (fadeOutPanel != null)
             {
                 Instantiate(fadeOutPanel, Vector3.zero, Quaternion.identity);
             }
             yield return new WaitForSeconds(fadeWait);
             SceneManager.LoadScene("Map");
+        }        
+
+        IEnumerator SecondCutScene()
+        {
+            //todo: Speaker speaks to the person, can't move
+            subtitle.text = "สวัสดีครับ อยากติดต่อใครครับ";
+            yield return new WaitForSeconds(3);
+            ChoiceButton.SetActive(true);
         }
 
         void OnDie()
