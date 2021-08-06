@@ -8,6 +8,7 @@ public class AnswerButton : MonoBehaviour
 
     public GameObject fadeInPanel;
     public GameObject fadeOutPanel;
+    public GameObject wrongAnswerPanel;
     public float fadeWait;
 
     private void Awake()
@@ -21,10 +22,15 @@ public class AnswerButton : MonoBehaviour
 
     public void AnswerNormal()
     {
-        StartCoroutine(FadeCo());
+        wrongAnswerPanel.SetActive(true);
     }
 
     public void AnswerAbNormal()
+    {
+        wrongAnswerPanel.SetActive(true);
+    }
+
+    public void Close()
     {
         StartCoroutine(FadeCo());
     }

@@ -21,7 +21,7 @@ public class CameraMovement : MonoBehaviour
     {
         if (transform.position  != target.position)
         {
-            Vector3 targetPosition = new Vector3(target.position.x, transform.position.y, target.position.z);
+            Vector3 targetPosition = new Vector3(target.position.x, transform.position.y, target.position.z -3);
             targetPosition.x = Mathf.Clamp(targetPosition.x, minPosition.x, maxPosition.x);
             targetPosition.z = Mathf.Clamp(targetPosition.z, minPosition.z, maxPosition.z);
             transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing);
