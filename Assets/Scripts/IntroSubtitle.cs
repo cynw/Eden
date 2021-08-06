@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,11 +18,13 @@ public class IntroSubtitle : MonoBehaviour
     {
         //todo: Speaker speaks to the person, can't move
         yield return new WaitForSeconds(2);
-        subtitle.text = "Huh?";
-        yield return new WaitForSeconds(4);
-        subtitle.text = "What is this place?";
+        subtitle.text = "ห้ะ";
+        yield return new WaitForSeconds(2);
+        subtitle.text = "";
+        yield return new WaitForSeconds(2);
+        subtitle.text = "ที่นี่ที่ไหน?";
         yield return new WaitForSeconds(3);
-        subtitle.text = "What's going on here!";
+        subtitle.text = "เกิดอะไรขึ้นเนี่ย!";
         yield return new WaitForSeconds(3);
         subtitle.text = "";
     }
