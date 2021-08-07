@@ -145,6 +145,7 @@ namespace Unity.FPS.Gameplay
         public GameObject fadeOutPanel;
         public float fadeWait;
         public GameObject ChoiceButton;
+        public GameObject GPSScreen;
 
         void Awake()
         {
@@ -236,7 +237,7 @@ namespace Unity.FPS.Gameplay
 
             if (!didGoOut && transform.position.x > -13)
             {
-                StartCoroutine(GoToMap());
+                StartCoroutine(ButtonToMap1());
                 didGoOut = true;
             }
 
@@ -258,16 +259,22 @@ namespace Unity.FPS.Gameplay
             yield return new WaitForSeconds(3);
             subtitle.text = "ไม่มีเวลาอธิบาย พวกมันมาแล้ว ออกไปจากที่นี่เร็ว!";
         }
+        
+        public void ButtonToMap()
+        {
+            StartCoroutine(ButtonToMap1());
+            
+        }
 
-        public IEnumerator GoToMap()
+        IEnumerator ButtonToMap1()
         {
             if (fadeOutPanel != null)
             {
                 Instantiate(fadeOutPanel, Vector3.zero, Quaternion.identity);
             }
             yield return new WaitForSeconds(fadeWait);
-            SceneManager.LoadScene("Map");
-        }        
+            SceneManager.LoadScene("GPS");
+        }
 
         IEnumerator SecondCutScene()
         {

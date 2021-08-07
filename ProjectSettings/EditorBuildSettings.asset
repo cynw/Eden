@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SecondScene.unity
     guid: 5f964082af9e31a4daab0c0a4543eca7
+  - enabled: 1
+    path: Assets/Scenes/GPS.unity
+    guid: 8d44c64733f161041949eac7def20a5d
   m_configObjects: {}
