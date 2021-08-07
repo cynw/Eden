@@ -16,23 +16,31 @@ namespace Unity.FPS.UI
         public GameObject MenuRoot;
         public GameObject fadeOutPanel;
         public float fadeWait;
+
+        public Text Button1;
+        public Text Button2;
+        public bool isSecondClick;
         // Start is called before the first frame update
         void Update()
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            Time.timeScale = 0f;
-
-            EventSystem.current.SetSelectedGameObject(null);
+            LockCamera();
         }
 
 
         public void ChoiceOne()
         {
-            subtitle.text = "";            
-            UnlockCamera();
-            StartCoroutine(ConverOne());
-            
+            if (isSecondClick)
+            {
+                subtitle.text = "";
+                UnlockCamera();
+                StartCoroutine(ConverOne2());
+            }
+            else
+            {
+                subtitle.text = "";
+                UnlockCamera();
+                StartCoroutine(ConverOne());
+            }
         }
 
         IEnumerator ConverOne()
@@ -42,24 +50,72 @@ namespace Unity.FPS.UI
             subtitle.text = "อ้าว แล้วผมต้องทำไงต่อเนี่ย";
             yield return new WaitForSeconds(2);
             subtitle.text = "ดูมีพิรุธ! ยามมาพาตัวออกไปเร็ว!";
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
             StartCoroutine(GoToMap());
+        }
+
+        IEnumerator ConverOne2()
+        {
+            subtitle.text = "ทราบแล้วครับ กรุณารอสักครู่ครับ";
+            yield return new WaitForSeconds(3);
+            subtitle.text = "";
+            yield return new WaitForSeconds(4);
+            subtitle.text = "ขอโทษที่ให้รอครับ นี่รายละเอียดโครงการที่คุณณัฐวรรณให้มาครับ";
+            yield return new WaitForSeconds(3);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            SceneManager.LoadScene("ProposalViewer");
         }
 
         public void ChoiceTwo()
         {
-            subtitle.text = "";
-            UnlockCamera();
-            StartCoroutine(ConverTwo());
+            if (isSecondClick)
+            {
+                subtitle.text = "";
+                UnlockCamera();
+                StartCoroutine(ConverTwo2());
+            }
+            else
+            {
+                subtitle.text = "";
+                UnlockCamera();
+                StartCoroutine(ConverTwo());
+            }
             
         }
 
         IEnumerator ConverTwo()
         {
-            subtitle.text = "ทราบแล้วครับ เชิญนั่งรอเก้าอี้ทางนั้นได้เลยครับ";
-            yield return new WaitForSeconds(10);
+            subtitle.text = "ไม่ทราบว่าได้ติดต่อล่วงหน้าไว้หรือไม่ครับ";
+            yield return new WaitForSeconds(4);
+            
+            //Second Click
+            isSecondClick = true;
+            Button1.text = "ครับ ติดต่อไว้เมื่อเช้า";
+            Button2.text = "ไม่ได้ติดต่อไว้ครับ";
+            ChoiceButton.SetActive(true);
+            LockCamera();
+
+            /*subtitle.text = "";
+            yield return new WaitForSeconds(5);
             subtitle.text = "นี่ครับ รายละเอียดโครงการ";
+            yield return new WaitForSeconds(3);*/
+        }
+
+        IEnumerator ConverTwo2()
+        {
+
+            subtitle.text = "งั้นไม่ได้ครับ ถ้าไม่ได้ติดต่อล่วงหน้า ไม่อนุญาติให้พบครับ";
             yield return new WaitForSeconds(3);
+            subtitle.text = "อ้าว! มีแบบนี้ด้วยเหรอ";
+            yield return new WaitForSeconds(2);
+            subtitle.text = "ยามครับ มาพาเขาออกไป";
+            yield return new WaitForSeconds(2);
+            subtitle.text = "เห้ย!";
+            yield return new WaitForSeconds(2);
+            subtitle.text = "";
+            yield return new WaitForSeconds(2);
+            StartCoroutine(GoToMap());
         }
 
         void UnlockCamera()
@@ -68,6 +124,15 @@ namespace Unity.FPS.UI
             ChoiceButton.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+        }
+
+        void LockCamera()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0f;
+
+            EventSystem.current.SetSelectedGameObject(null);
         }
 
         IEnumerator GoToMap()
