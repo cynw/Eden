@@ -252,7 +252,7 @@ namespace Unity.FPS.Gameplay
             //todo: Speaker speaks to the person, can't move
             subtitle.text = "โอเค คุณมาถึงละ";
             yield return new WaitForSeconds(4);
-            subtitle.text = "คุณต้องทำตามที่ผมบอก ต่อจากนี้คุณจะต้องตามหาสิ่งที่เรียกว่า proposal";
+            subtitle.text = "คุณต้องทำตามที่ผมบอก ถ้าอยากได้ความทรงจำกลับคืนมา";
             yield return new WaitForSeconds(5);
             subtitle.text = "เดี๋ยวๆ เกิดอะไรขึ้น!";
             yield return new WaitForSeconds(3);
