@@ -13,11 +13,20 @@ public class Map : MonoBehaviour
     public GameObject Timeline;
     public PlayableDirector director;
     public Image ExpFillImage;
+    public GameObject fadeOutPanel;
+    public GameObject MoreMap;
+    public float fadeWait;
     // Start is called before the first frame update
     void Start()
     {
         FirstCamera.SetActive(false);
         MainCamera.SetActive(true);
+        
+        if (PlayerPrefs.GetInt("FirstMem") == 1)
+        {
+            MoreMap.SetActive(true);
+        }
+        
         director = GetComponent<PlayableDirector>();
         if (PlayerPrefs.GetInt("Map") != 1)
         {
@@ -25,9 +34,14 @@ public class Map : MonoBehaviour
             // add code here to start the video
             StartCoroutine(FirstTimeMap());
         }
-        
-    }
 
+        if (PlayerPrefs.GetInt("LevelUp") == 1)
+        {
+            PlayerPrefs.SetInt("LevelUp", 0);
+            PlayerPrefs.SetInt("FirstMem", 1);
+            LevelUp();
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -59,5 +73,30 @@ public class Map : MonoBehaviour
         subtitle.text = "โอเค ตอนนี้เราตามลูกศรใกล้ๆไปก่อนนะ";
         yield return new WaitForSeconds(3);
         subtitle.text = "";
+    }
+
+    void LevelUp()
+    {
+        //Show cutscene
+        StartCoroutine(FirstMem());
+
+        //Add map
+    }
+
+    IEnumerator FirstMem()
+    {
+        
+        subtitle.text = "เธอพึ่งได้ประสบการณ์ ตอนนี้แผนที่ถูกเพิ่มแล้ว";
+        yield return new WaitForSeconds(3);
+        subtitle.text = "คุณจะเข้าใกล้ตึกหลังนั้นได้เรื่อยๆ";
+        yield return new WaitForSeconds(3);
+        
+        if (fadeOutPanel != null)
+        {
+            Instantiate(fadeOutPanel, Vector3.zero, Quaternion.identity);
+        }
+        yield return new WaitForSeconds(fadeWait);
+
+        SceneManager.LoadScene("FirstMem");
     }
 }

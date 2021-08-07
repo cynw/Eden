@@ -62,6 +62,7 @@ public class ProposalDisplay : MonoBehaviour
         {
             rightAnswerPanel.SetActive(true);
             PlayerPrefs.SetFloat("CurrentExp", 0);
+            PlayerPrefs.SetInt("LevelUp", 1);
         }
     }
 
@@ -71,6 +72,7 @@ public class ProposalDisplay : MonoBehaviour
         {
             rightAnswerPanel.SetActive(true);
             PlayerPrefs.SetFloat("CurrentExp", 0);
+            PlayerPrefs.SetInt("LevelUp", 1);
         }
         else
         {
