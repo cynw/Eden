@@ -3,25 +3,107 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ProposalDisplay : MonoBehaviour
 {
 
     public GameObject projectName;
+    public GameObject projectSubname;
     public GameObject projectDescription;
-    public GameObject projectMoney;
-    
+    public GameObject displayBudget;
+    public GameObject realBudget;
+    private bool isFake;
+
+    public GameObject fadeInPanel;
+    public GameObject fadeOutPanel;
+    public GameObject rightAnswerPanel;
+    public GameObject wrongAnswerPanel;
+    public float fadeWait;
+
+    private void Awake()
+    {
+        if (fadeInPanel != null)
+        {
+            GameObject panel = Instantiate(fadeInPanel, Vector3.zero, Quaternion.identity);
+            Destroy(panel, 1);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        projectName.GetComponent<Text>().text = "จ้างก่อสร้างถนนผิวจราจรแอสฟัลท์คอนกรีต สายบ้านรวมทรัพย์ - บ้านหนองภิรมย์ หมู่ที่ ๖,๑๖ ตำบลภูน้ำหยด อำเภอวิเชียรบุรี จังหวัดเพชรบูรณ์ โดยวิธีคัดเลือก";
-        projectDescription.GetComponent<Text>().text = "ก่อสร้างถนนผิวจราจรแอสฟัลท์คอนกีต กว้าง ๖.๐๐ เมตร ไหล่ทางข้างละ ๑.๐๐ เมตร รวมผิวจราจรกว้าง ๘.๐๐ เมตร ยาว ๙,๔๓๘.๐๐ เมตร หนา ๐.๐๕ เมตร หรือมีพื้นที่ผิวจราจร แอสฟัลท์คอนกรีตไม่น้อยกว่า ๗๕,๕๐๔ ตารางเมตร พร้อมรางระบายน้ำ คสล.ในสายทาง รายละเอียดตามแบบแปลนขององค์การบริหารส่วนจังหวัดเพชรบูรณ์ กำหนด";
-        projectMoney.GetComponent<Text>().text = "39558000 บาท";
+        Proposal p = ProposalDataSource.getRandomProposal();
+        int indexOfSpace = p.title.IndexOf(" ");
+        string mainTitle = p.title.Substring(0, indexOfSpace);
+        string subTitle = p.title.Substring(indexOfSpace, p.title.Length -indexOfSpace- 1);
+        projectName.GetComponent<Text>().text = mainTitle;
+        projectSubname.GetComponent<Text>().text = subTitle;
+        projectDescription.GetComponent<Text>().text = p.description;
+        realBudget.GetComponent<Text>().text = formatBudget(p.budget);
+        isFake = true;
+        float displayBuget = p.budget;
+        if (isFake)
+        {
+            displayBuget = p.budget * 3;
+        }
+        
+        displayBudget.GetComponent<Text>().text = formatBudget(displayBuget);
+        
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AnswerNormal()
     {
-        
+        if (isFake)
+        {
+            wrongAnswerPanel.SetActive(true);
+        }
+        else
+        {
+            rightAnswerPanel.SetActive(true);
+        }
+    }
+
+    public void AnswerAbNormal()
+    {
+        if (isFake)
+        {
+            rightAnswerPanel.SetActive(true);
+        }
+        else
+        {
+            wrongAnswerPanel.SetActive(true);
+        }
+    }
+
+    public void Close()
+    {
+        StartCoroutine(FadeCo());
+    }
+
+    private string formatBudget(float budget)
+    {
+        if (Mathf.Log10(budget) > 6)
+        {
+            return Mathf.Floor(budget / 1000000) + " ล้านบาท";
+        }
+        else
+        {
+            return budget + " บาท";
+        }
+    }
+
+    private IEnumerator FadeCo()
+    {
+        if (fadeOutPanel != null)
+        {
+            Instantiate(fadeOutPanel, Vector3.zero, Quaternion.identity);
+        }
+        yield return new WaitForSeconds(fadeWait);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Map");
+        while (!asyncOperation.isDone)
+        {
+            yield return null;
+        }
     }
 }
