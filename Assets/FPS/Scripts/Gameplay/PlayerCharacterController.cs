@@ -258,13 +258,7 @@ namespace Unity.FPS.Gameplay
             subtitle.text = "เดี๋ยวๆ เกิดอะไรขึ้น!";
             yield return new WaitForSeconds(3);
             subtitle.text = "ไม่มีเวลาอธิบาย พวกมันมาแล้ว ออกไปจากที่นี่เร็ว!";
-        }
-        
-        public void ButtonToMap()
-        {
-            StartCoroutine(ButtonToMap1());
-            
-        }
+        }       
 
         IEnumerator ButtonToMap1()
         {

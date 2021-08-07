@@ -39,9 +39,9 @@ public class Map : MonoBehaviour
         subtitle.text = "โอเค ตอนนี้น่าจะปลอดภัย";
         yield return new WaitForSeconds(3);
         subtitle.text = "ถ้าคุณอยากได้ความทรงจำกลับมา คุณต้องเก็บรวบรวม proposal";
-        yield return new WaitForSeconds(3);
-        subtitle.text = "แล้วคุณจะได้ความทรงจำกลับมาทีละเล็กน้อย แต่วิธีที่จะทำให้คุณปลอดภัยที่สุดก็คือ";
         yield return new WaitForSeconds(4);
+        subtitle.text = "แล้วคุณจะได้ความทรงจำกลับมาทีละเล็กน้อย แต่วิธีที่จะทำให้คุณปลอดภัยที่สุดก็คือ";
+        yield return new WaitForSeconds(5);
         subtitle.text = "ไปให้ถึงตึกหลังนั้น";
         //move camera
         FirstCamera.SetActive(true);
