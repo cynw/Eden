@@ -12,15 +12,16 @@ public class Map : MonoBehaviour
     public GameObject FirstCamera;
     public GameObject Timeline;
     public PlayableDirector director;
+    public Image ExpFillImage;
     // Start is called before the first frame update
     void Start()
     {
         FirstCamera.SetActive(false);
         MainCamera.SetActive(true);
         director = GetComponent<PlayableDirector>();
-        if (PlayerPrefs.GetInt("Map") != 0)
+        if (PlayerPrefs.GetInt("Map") != 1)
         {
-            PlayerPrefs.SetInt("Map", 0);
+            PlayerPrefs.SetInt("Map", 1);
             // add code here to start the video
             StartCoroutine(FirstTimeMap());
         }
@@ -31,7 +32,8 @@ public class Map : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        ExpFillImage.fillAmount = PlayerPrefs.GetFloat("CurrentExp") / 10f;
     }
 
     IEnumerator FirstTimeMap()

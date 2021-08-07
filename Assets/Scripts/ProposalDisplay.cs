@@ -61,6 +61,7 @@ public class ProposalDisplay : MonoBehaviour
         else
         {
             rightAnswerPanel.SetActive(true);
+            PlayerPrefs.SetFloat("CurrentExp", 0);
         }
     }
 
@@ -69,6 +70,7 @@ public class ProposalDisplay : MonoBehaviour
         if (isFake)
         {
             rightAnswerPanel.SetActive(true);
+            PlayerPrefs.SetFloat("CurrentExp", 0);
         }
         else
         {

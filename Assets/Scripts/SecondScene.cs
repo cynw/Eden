@@ -34,6 +34,7 @@ namespace Unity.FPS.UI
                 subtitle.text = "";
                 UnlockCamera();
                 StartCoroutine(ConverOne2());
+                PlayerPrefs.SetFloat("CurrentExp", 9f);
             }
             else
             {
@@ -80,6 +81,7 @@ namespace Unity.FPS.UI
                 subtitle.text = "";
                 UnlockCamera();
                 StartCoroutine(ConverTwo());
+                PlayerPrefs.SetFloat("CurrentExp", 6f);
             }
             
         }

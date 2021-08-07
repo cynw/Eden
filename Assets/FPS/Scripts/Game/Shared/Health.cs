@@ -6,6 +6,7 @@ namespace Unity.FPS.Game
     public class Health : MonoBehaviour
     {
         [Tooltip("Maximum amount of health")] public float MaxHealth = 10f;
+        [Tooltip("Current health")] public float CurExp;
 
         [Tooltip("Health ratio at which the critical health vignette starts appearing")]
         public float CriticalHealthRatio = 0.3f;
@@ -25,7 +26,7 @@ namespace Unity.FPS.Game
 
         void Start()
         {
-            CurrentHealth = MaxHealth;
+            CurrentHealth = CurExp;
         }
 
         public void Heal(float healAmount)

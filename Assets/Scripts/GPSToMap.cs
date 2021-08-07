@@ -26,6 +26,7 @@ public class GPSToMap : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        PlayerPrefs.SetFloat("CurrentExp", 3f);
         SceneManager.LoadScene("Map");
 
     }
