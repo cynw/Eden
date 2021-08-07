@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GPS.unity
     guid: 8d44c64733f161041949eac7def20a5d
+  - enabled: 1
+    path: Assets/Scenes/FirstMem.unity
+    guid: 2194fe559202da244a6cc0ad8cbc636d
   m_configObjects: {}
