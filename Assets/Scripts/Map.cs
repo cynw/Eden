@@ -15,14 +15,16 @@ public class Map : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FirstCamera.SetActive(false);
+        MainCamera.SetActive(true);
         director = GetComponent<PlayableDirector>();
-        if (PlayerPrefs.GetInt("Map") != 1)
+        if (PlayerPrefs.GetInt("Map") != 0)
         {
-            PlayerPrefs.SetInt("Map", 1);
+            PlayerPrefs.SetInt("Map", 0);
             // add code here to start the video
-            
+            StartCoroutine(FirstTimeMap());
         }
-        StartCoroutine(FirstTimeMap());
+        
     }
 
 
